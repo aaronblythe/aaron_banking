@@ -1,0 +1,116 @@
+{
+  "name": "3ad5688c-d477-44bf-af80-cf43411ef340",
+  "displayName": "\u003e confirm lock card",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eOkay, your card ending with \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e will be permanently locked. Once locked, you will not be able to make any transactions online or on POS machines with that card. Do you confirm this action?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e lock card request API",
+    "name": "60144396-03fa-4514-a53a-261b2c998e09"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "end failure",
+    "name": "224dc375-88ab-4b49-91bb-2d3e50dea3d4"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "51b8c90b-edcf-43e2-8378-548bf430e304"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "97445497-ee06-4e9f-a842-68b77fd3deb7"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. \u003cspeak\u003eYour card ending with \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e will be permanent locked. Once locked, you will not be able to make any transactions online or on POS machines with that card. Do you confirm this action?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "26881bde-36f7-410a-9cf0-4fb7033dc26d"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. \u003cspeak\u003eYour card ending with \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e will be permanent locked. Once locked, you will not be able to make any transactions online or on POS machines with that card. Do you confirm this action?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "518f1278-17ce-4955-bc14-5a3b9a67d6ae"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "5236a7ba-aa8d-40c0-8c87-3469188c3ce0"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. \u003cspeak\u003eYour card ending with \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e will be permanent locked. Once locked, you will not be able to make any transactions online or on POS machines with that card. Do you confirm this action?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9778796e-775c-45fd-9905-10bb8cb6d18f"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. \u003cspeak\u003eYour card ending with \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e will be permanent locked. Once locked, you will not be able to make any transactions online or on POS machines with that card. Do you confirm this action?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "96a8e9a3-4c3f-4c12-b13c-9bf21f47433f"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "be4ce626-5736-425c-98d0-0712296ce06c"
+  } ],
+  "description": "Agent response defined at Entry fulfillment"
+}

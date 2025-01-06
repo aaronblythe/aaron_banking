@@ -1,0 +1,47 @@
+{
+  "name": "6dc07147-8756-49a2-8c79-044571083490",
+  "displayName": "check reissue status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$flow.reissue_status = true",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$flow.dispatch_status = \"true\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Your request to re-issue a new card has already been processed. Your card will be delivered in the next $flow.card_estimated_duration." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Your request to re-issue a new card is still under process. Your card will be dispatched in the next $flow.card_estimated_duration." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "end success",
+    "name": "42967cec-d02c-4781-93e8-98ed7f250642"
+  }, {
+    "condition": "$flow.reissue_status = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e confirm reissue new card",
+    "name": "7433d046-636a-4083-b180-49e5c153e89c"
+  } ],
+  "description": "Conditional response added in 1st route"
+}

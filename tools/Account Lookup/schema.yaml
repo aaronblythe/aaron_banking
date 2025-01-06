@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+ title: User Lookup API
+ description: Used to look up the user
+ version: 0.1.0
+servers:
+ - url: https://usaa-lookup-258664626586.us-central1.run.app
+   description: Main (production) server
+paths:
+ /user/{telephoneNumber}:
+   post:
+     operationId: getUserById
+     summary: Returns a user by telephoneNumber.
+     parameters:
+       - name: telephoneNumber
+         in: path
+         required: true
+         description: The ID of the user to return.
+         schema:
+           type: string
+           minimum: 1
+     responses:
+       '200':
+         description: Get the user information
+         content:
+           application/json:
+             schema:
+               type: object
+               properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                currency:
+                  type: string
+                banking:
+                  type: object
+                  properties:
+                    total_balance:
+                      type: number
+                      format: float
+                    latest_transactions:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          transactionId:
+                            type: string
+                          date:
+                            type: string
+                            format: date
+                          amount:
+                            type: integer
+                          merchant:
+                            type: string
+                          category:
+                            type: string
+                          status:
+                            type: string
+                          userLocation:
+                            type: string
+                          deviceInfo:
+                            type: string
+                          failedTransactionAttempts:
+                            type: integer
+                          paymentMethod:
+                            type: string
+                    last_updated:
+                      type: string
+                      format: date-time
+                credit:
+                  type: object
+                  properties:
+                    nextPaymentDue:
+                      type: string
+                      format: date
+                    amount:
+                      type: integer
+                insurance:
+                  type: object
+                  properties:
+                    policyNumber:
+                      type: string
+                    recentClaims:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                          amount:
+                            type: integer
+                    nextPaymentAmount:
+                      type: integer
+                mortgage:
+                  type: object
+                  properties:
+                    loanBalance:
+                      type: integer
+                    monthlyPayment:
+                      type: integer
+                    currentPrincipal:
+                      type: integer
+                    currentInterest:
+                      type: integer
+                    nextPaymentDue:
+                      type: string
+                      format: date
+                    amount:
+                      type: integer
+
+       '400':
+         description: Invalid phone number

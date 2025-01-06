@@ -1,0 +1,28 @@
+{
+  "name": "0c73633d-547e-4e1e-be0a-9aa38be19edd",
+  "displayName": "check card upgrade",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$flow.card_upgrade = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e confirm card upgrade",
+    "name": "f8873edf-1021-438d-8e85-5de208c976e1"
+  }, {
+    "condition": "$flow.card_upgrade = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.card_upgrade_type",
+        "value": null
+      } ]
+    },
+    "targetPage": "\u003e confirm delivery address",
+    "name": "0bb2c3c9-1ebc-4829-98de-2b838cefc87d"
+  } ]
+}

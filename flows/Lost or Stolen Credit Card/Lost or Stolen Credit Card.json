@@ -1,0 +1,81 @@
+{
+  "name": "665ac924-9c09-468f-9675-216ee6d78849",
+  "displayName": "Lost or Stolen Credit Card",
+  "transitionRoutes": [ {
+    "intent": "credit card last four digits",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thank you, transferring now." ]
+        },
+        "languageCode": "en"
+      }, {
+        "liveAgentHandoff": {
+          "metadata": {
+            "liveAgentHandoff": true
+          }
+        },
+        "languageCode": "en"
+      }, {
+        "payload": {
+          "ujet": {
+            "action": "escalation",
+            "escalation_reason": "by_virtual_agent",
+            "type": "action"
+          }
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "escalate",
+    "name": "1de420f0-d758-4b4d-bda3-8c6168760233"
+  }, {
+    "condition": "$session.params.ask_once != TRUE",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I am going to transfer you to a live agent, however first let's get some information from you.   What are the last four digits of your credit card?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$session.params.ask_once",
+        "value": "TRUE"
+      } ]
+    },
+    "name": "9a974627-664e-4451-b606-6e565b1643f2"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a36d4523-ea8f-4e8f-9234-ae4533182aa5"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "ce9da873-0821-475c-926a-6e1fad3210eb"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.30000001
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.30000001,
+    "customConfigKey": "dbc35291-a5c3-44c0-871b-9ed49edde537",
+    "languageCode": "en"
+  } ]
+}

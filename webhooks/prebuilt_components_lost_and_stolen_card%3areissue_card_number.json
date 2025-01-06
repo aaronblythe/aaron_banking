@@ -1,0 +1,17 @@
+{
+  "name": "d90b2b71-a8fd-4fb5-bc06-f8af54f4cf55",
+  "displayName": "prebuilt_components_lost_and_stolen_card:reissue_card_number",
+  "genericWebService": {
+    "uri": "https://www.example.com",
+    "webhookType": "FLEXIBLE",
+    "httpMethod": "POST",
+    "requestBody": "{\n  \"phone_number\": \"$session.params.phone_number\",\n  \"masked_card_number\": \"$session.params.last_four_digit_of_card_number\",\n  \"zip_code\": \"$flow.zip_code\",\n  \"card_upgrade\": \"$flow.card_upgrade\",\n  \"card_upgrade_type\": \"$flow.card_upgrade_type\",\n  \"fulfillmentInfo\": {\n    \"tag\": \"reissueCard\"\n  }\n}",
+    "parameterMapping": [ {
+      "key": "$flow.acknowledgement_number",
+      "value": "ticket_number"
+    } ]
+  },
+  "timeout": {
+    "seconds": 5
+  }
+}

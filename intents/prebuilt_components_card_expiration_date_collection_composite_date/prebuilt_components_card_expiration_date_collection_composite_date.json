@@ -1,0 +1,10 @@
+{
+  "name": "aefa9534-f51a-4760-9381-820b50f25391",
+  "displayName": "prebuilt_components_card_expiration_date_collection_composite_date",
+  "parameters": [ {
+    "id": "end_date",
+    "entityType": "@sys.date-period"
+  } ],
+  "priority": 500000,
+  "numTrainingPhrases": 20
+}

@@ -1,0 +1,44 @@
+{
+  "name": "0fd5fcac-a203-4f29-b94f-b89da0e286b6",
+  "displayName": "prebuilt_components_lost_and_stolen_card:validate_card",
+  "genericWebService": {
+    "uri": "https://www.example.com",
+    "webhookType": "FLEXIBLE",
+    "httpMethod": "POST",
+    "requestBody": "{\n  \"phone_number\": \"$session.params.phone_number\",\n  \"masked_card_number\": \"$session.params.last_four_digit_of_card_number\",\n  \"fulfillmentInfo\": {\n    \"tag\": \"verifyCard\"\n  }\n}",
+    "parameterMapping": [ {
+      "key": "$flow.card_estimated_duration",
+      "value": "card_estimated_duration"
+    }, {
+      "key": "$flow.card_status",
+      "value": "card_status"
+    }, {
+      "key": "$flow.card_upgrade",
+      "value": "card_upgrade"
+    }, {
+      "key": "$flow.card_upgrade_annual_fee",
+      "value": "card_upgrade_annual_fee"
+    }, {
+      "key": "$flow.card_upgrade_benefit",
+      "value": "card_upgrade_benefit"
+    }, {
+      "key": "$flow.card_upgrade_type",
+      "value": "card_upgrade_type"
+    }, {
+      "key": "$flow.card_vendor",
+      "value": "card_vendor"
+    }, {
+      "key": "$flow.dispatch_status",
+      "value": "dispatch_status"
+    }, {
+      "key": "$flow.reissue_status",
+      "value": "reissue_status"
+    }, {
+      "key": "$flow.zip_code",
+      "value": "zip_code"
+    } ]
+  },
+  "timeout": {
+    "seconds": 5
+  }
+}

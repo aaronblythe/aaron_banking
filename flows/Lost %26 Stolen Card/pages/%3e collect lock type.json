@@ -1,0 +1,159 @@
+{
+  "name": "b0e3e496-cbcc-4388-bae2-bebdd72bc50b",
+  "displayName": "\u003e collect lock type",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.card_count = 1 AND $flow.single_card_confirmation = 0",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "\u003cspeak\u003eWe have found your $flow.card_vendor ending in \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e.\u003c/speak\u003e" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Do you want to lock your card permanently?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.card_count \u003e 1",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Do you want to lock your card permanently?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.lock_type",
+        "value": "$flow.card_status_lock_permanent"
+      } ]
+    },
+    "targetPage": "\u003e collect lock reason",
+    "name": "8c20aad0-e29e-433b-9912-9c1a70f16a3b"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "condition": "$session.params.card_count = 1 AND $flow.single_card_confirmation = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eTo confirm, we have found one card registered to your account, ending in \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e.\u003c/speak\u003e Would you like to lock your card permanently?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$flow.single_card_confirmation",
+        "value": "$sys.func.ADD($flow.single_card_confirmation,1)"
+      } ]
+    },
+    "name": "da8ff34e-bfdf-42da-828c-38b6b2f45833"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "end failure",
+    "name": "893ff3aa-b205-454b-ad5b-b7ba89ee01d5"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "4fa004e6-ff1f-4d78-8f19-e567ae2b0882"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "0396d1ba-c4dd-4561-8b4e-44e64e398446"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. Do you want to lock your card permanently?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "36b90ae7-9d10-4d13-9460-ce1a5b997c07"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. Do you want to lock your card permanently?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "e2fec4fa-bd64-41c1-8fa8-31cfee2e51be"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "3fff07b9-f644-4d77-bc40-48aa970716f8"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. Do you want to lock your card permanently?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a5da1ea0-6cea-4eb0-b1b1-213e5d111d45"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. Do you want to lock your card permanently?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c5ae5c94-7532-4c4d-a235-f954dfd02e43"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "915109e3-4771-4975-81a3-b461a2c114dd"
+  } ],
+  "description": "Conditional response defined at Entry fulfillment\nEvent handlers added in parameters"
+}

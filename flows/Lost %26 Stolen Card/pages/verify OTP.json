@@ -1,0 +1,34 @@
+{
+  "name": "3924a789-03e3-44c3-89ac-f573b2cc4e4a",
+  "displayName": "verify OTP",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$flow.collect_otp = $flow.generated_otp",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.otp_verified_status",
+        "value": "true"
+      }, {
+        "parameter": "$flow.collect_otp",
+        "value": null
+      } ]
+    },
+    "targetPage": "\u003e confirm lock card",
+    "name": "2f3cbba0-5e8b-4efc-81a3-05e5cea9269b"
+  }, {
+    "condition": "$flow.collect_otp != $flow.generated_otp",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.otp_not_received",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "retry OTP",
+    "name": "5f00b0fb-2a3d-4575-851b-a25677555e74"
+  } ]
+}

@@ -1,0 +1,119 @@
+{
+  "name": "6d2e58f5-2da1-4e92-b6bc-cec682269025",
+  "displayName": "\u003e confirm card number retry",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "The card number you provided is not found. If you want to try again, please say yes." ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "condition": "$flow.retry_card_number \u003c $flow.max_retry_card_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.retry_card_number",
+        "value": "$sys.func.ADD($flow.retry_card_number,1)"
+      } ]
+    },
+    "targetPage": "\u003e fetch card details API",
+    "name": "056f8005-6eb3-4752-9e64-51aef92fa769"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "end failure",
+    "name": "22d6ed59-8ff5-4a28-a7d5-1e4b8c867056"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "041e37ca-4140-4b0e-bd55-0a92ee58ab05"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tarnsfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "92a63143-c547-4e95-83cf-5f479ed2bdbf"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. If you want to try again, please say yes." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "95e58936-4541-499a-bada-5b868f4fa822"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. If you want to try again, please say yes." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "991b2cef-a124-4a59-a0b4-d754fe6259f7"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "f9e06879-9bd5-4991-940f-b500ac5b4a33"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. If you want to try again, please say yes." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "021f7ec5-b83d-4ba4-8761-dd9020608c5b"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. If you want to try again, please say yes." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "af783f95-2e6c-4b92-aa7d-d19c14f5f65f"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "d905e99a-c04b-4ac6-9209-4a2319cac7d6"
+  } ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "1b1b24f1-ab97-437d-ae4d-6b33caebe780",
+  "displayName": "Account Balance",
+  "priority": 500000,
+  "description": "Send to playbook to look up user's account balance status.",
+  "numTrainingPhrases": 2
+}

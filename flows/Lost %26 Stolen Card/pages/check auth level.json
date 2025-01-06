@@ -1,0 +1,56 @@
+{
+  "name": "be69731d-1cf5-42a1-8fe5-fed4f18ce254",
+  "displayName": "check auth level",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "auth_level_req",
+      "value": 1
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_level \u003c $session.params.auth_level_req OR $session.params.auth_level = null OR $session.params.auth_level = \"\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "Authentication",
+    "name": "a280d6bd-6428-4ad5-aeb0-3f3289fb866b"
+  }, {
+    "condition": "$session.params.card_count \u003e 1 AND $session.params.last_four_digit_of_card_number != null AND $session.params.auth_level \u003e= $session.params.auth_level_req",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eWe have found a card number ending with \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e associated with your number. If you would like to proceed with this card, please say yes.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "\u003e confirm card number",
+    "name": "7ae0a9a5-2f85-483e-ab41-acef5deff8fb"
+  }, {
+    "condition": "$session.params.auth_level \u003e= $session.params.auth_level_req",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e fetch card details API",
+    "name": "109f8ae5-469b-4db6-8fad-b9ba3b8304ee"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "end failure",
+    "event": "flow.failed",
+    "triggerFulfillment": {
+    
+    },
+    "name": "556e95c1-965a-4afa-be4b-a158ebb71ad6"
+  }, {
+    "targetPage": "end escalation",
+    "event": "flow.failed.human-escalation",
+    "triggerFulfillment": {
+    
+    },
+    "name": "30f3b0aa-4a91-4ae7-9f8a-7fc7742a1657"
+  } ],
+  "description": "Route based message is added in 2nd route"
+}

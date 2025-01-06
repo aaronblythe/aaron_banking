@@ -1,0 +1,11 @@
+{
+  "name": "1afebb35-94be-4ad3-b552-2aeae8bbb102",
+  "displayName": "prebuilt_components_card_number_collection_four_digit_card_number",
+  "parameters": [ {
+    "id": "last_four_digit_of_card_number",
+    "entityType": "@sys.number-sequence",
+    "isList": true
+  } ],
+  "priority": 500000,
+  "numTrainingPhrases": 50
+}

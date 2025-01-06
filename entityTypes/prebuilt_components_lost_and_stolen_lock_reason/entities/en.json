@@ -1,0 +1,19 @@
+{
+  "entities": [ {
+    "value": "damaged",
+    "synonyms": [ "broken", "damaged", "old" ],
+    "languageCode": "en"
+  }, {
+    "value": "stolen",
+    "synonyms": [ "steal", "stolen" ],
+    "languageCode": "en"
+  }, {
+    "value": "lost",
+    "synonyms": [ "can't find", "cannot find", "don't find", "lost" ],
+    "languageCode": "en"
+  }, {
+    "value": "others",
+    "synonyms": [ "additional", "don't need", "extra", "not needed", "not required", "not using", "others", "unused" ],
+    "languageCode": "en"
+  } ]
+}

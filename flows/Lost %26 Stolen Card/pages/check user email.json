@@ -1,0 +1,54 @@
+{
+  "name": "e40a14bd-d9b1-44ee-b84a-985922e8c95c",
+  "displayName": "check user email",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "last_4_digit",
+      "value": "$sys.func.MID($session.params.phone_number,$sys.func.MINUS($sys.func.LEN($session.params.phone_number),3),4)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.email = null OR $session.params.email = \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.channel",
+        "value": "mobile"
+      } ]
+    },
+    "targetPage": "\u003e send OTP API",
+    "name": "748171f8-5426-4473-96d6-3eb26961e870"
+  }, {
+    "condition": "$session.params.email != null",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$flow.otp_retry_count = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "For security purposes, we need to validate your identity, so we will send you a code. Do you prefer to receive the code by phone or by email?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$flow.otp_retry_count \u003c $flow.max_otp_retry_count",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry about that. Do you prefer to receive the code by phone or by email?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "\u003e confirm OTP channel",
+    "name": "6e930888-2e57-449b-a593-32d794f44e3f"
+  } ],
+  "description": "Conditional response defined at 2nd route"
+}

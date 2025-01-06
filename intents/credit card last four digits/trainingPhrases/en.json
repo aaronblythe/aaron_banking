@@ -1,0 +1,59 @@
+{
+  "trainingPhrases": [ {
+    "parts": [ {
+      "text": "the ",
+      "auto": true
+    }, {
+      "text": "credit card"
+    }, {
+      "text": " ",
+      "auto": true
+    }, {
+      "text": "digits"
+    }, {
+      "text": " are ",
+      "auto": true
+    }, {
+      "text": "0987",
+      "parameterId": "number"
+    } ],
+    "repeatCount": 1,
+    "languageCode": "en"
+  }, {
+    "parts": [ {
+      "text": "the ",
+      "auto": true
+    }, {
+      "text": "digits"
+    }, {
+      "text": " are ",
+      "auto": true
+    }, {
+      "text": "3456",
+      "parameterId": "number"
+    } ],
+    "repeatCount": 1,
+    "languageCode": "en"
+  }, {
+    "parts": [ {
+      "text": "1234",
+      "parameterId": "number",
+      "auto": true
+    } ],
+    "repeatCount": 1,
+    "languageCode": "en"
+  }, {
+    "parts": [ {
+      "text": "my last "
+    }, {
+      "text": "four"
+    }, {
+      "text": " digits are "
+    }, {
+      "text": "4567",
+      "parameterId": "number"
+    } ],
+    "repeatCount": 1,
+    "languageCode": "en"
+  } ]
+}

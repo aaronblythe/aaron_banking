@@ -1,0 +1,100 @@
+{
+  "name": "00000000-0000-0000-0000-000000000000",
+  "displayName": "Default Start Flow",
+  "description": "A start flow created along with the agent",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Welcome to the Cymbal Bank! How may I assist you today?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "last-four",
+        "value": 0
+      } ]
+    },
+    "name": "c272d1e0-bbb9-443c-818e-764e6406bb32"
+  }, {
+    "intent": "Account Balance",
+    "triggerFulfillment": {
+    
+    },
+    "name": "999e835d-8dd1-4cce-b967-1da47969d5bb",
+    "targetPlaybook": "Account Lookup"
+  }, {
+    "intent": "Lost or stolen credit card",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "OK we will get you to an agent. While you wait, let's gather some information.   What are the last four digits of your credit card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "Lost or Stolen Credit Card",
+    "name": "3d5f1f83-5043-477b-ba35-4a9183f572e5",
+    "description": "Credit card was lost or stolen"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "enableGenerativeFallback": true
+    },
+    "name": "0c28ec58-7815-40b3-bbc7-6c5eb2c06b33"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "8184262c-df2d-446c-82aa-a609d6c26e54"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_STANDARD",
+    "classificationThreshold": 0.30000001
+  },
+  "knowledgeConnectorSettings": {
+    "enabled": true,
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.knowledge.answers[0]" ]
+        },
+        "languageCode": "en"
+      }, {
+        "languageCode": "en",
+        "knowledgeInfoCard": {
+          "maximumSnippets": 1
+        }
+      } ]
+    },
+    "dataStoreConnections": [ {
+      "dataStoreType": "UNSTRUCTURED",
+      "dataStore": "projects/258664626586/locations/global/collections/default_collection/dataStores/aaron-banking_1734020116046",
+      "languageCode": "en",
+      "documentProcessingMode": "DOCUMENTS",
+      "aclConfig": {
+      
+      }
+    } ]
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_STANDARD",
+    "classificationThreshold": 0.69999999,
+    "customConfigKey": "a9faec8e-f35a-4705-9123-4cb55cacf630",
+    "languageCode": "en"
+  } ]
+}

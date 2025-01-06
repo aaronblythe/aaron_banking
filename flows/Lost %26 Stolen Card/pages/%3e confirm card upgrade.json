@@ -1,0 +1,125 @@
+{
+  "name": "0e5a6f30-aee2-44ba-8eca-c5cf684f957d",
+  "displayName": "\u003e confirm card upgrade",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "You are eligible for a $flow.card_upgrade_type card. The annual fee is $flow.card_upgrade_annual_fee dollars, and you can get annual bonuses and special benefits worth $flow.card_upgrade_benefit dollars. Please click on the link sent to your registered mobile number to learn more." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Do you want to enroll for this card?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e confirm delivery address",
+    "name": "215a322c-b575-4e79-9c9a-01976456accb"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, we will send you a new card, and the benefits remain the same as on your old card." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "\u003e confirm delivery address",
+    "name": "d8c73fbe-9888-4a2a-b8b1-e2dff042a0db"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "8667c498-974a-4ce5-b678-74ead3fc4c6a"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "6ac287d1-6c11-43b4-9f28-f79287154d6d"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. You are eligible for a $flow.card_upgrade_type card. The annual fee is $flow.card_upgrade_annual_fee dollars, and you can get annual bonuses and special benefits worth $flow.card_upgrade_benefit dollars.\nDo you want to enroll for this card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6f949b0c-9add-4305-a169-349e194e07ca"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. You are eligible for a $flow.card_upgrade_type card. The annual fee is $flow.card_upgrade_annual_fee dollars, and you can get annual bonuses and special benefits worth $flow.card_upgrade_benefit dollars.\nDo you want to enroll for this card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "cca2fe44-a8fc-4d67-802a-0b9167fc5773"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "198ebaec-3bf7-472d-828c-d8f065e89624"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. You are eligible for a $flow.card_upgrade_type card. The annual fee is $flow.card_upgrade_annual_fee dollars, and you can get annual bonuses and special benefits worth $flow.card_upgrade_benefit dollars.\nDo you want to enroll for this card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "b35e9eb2-a43b-441e-8dcc-286ab3267f3f"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. You are eligible for a $flow.card_upgrade_type card. The annual fee is $flow.card_upgrade_annual_fee dollars, and you can get annual bonuses and special benefits worth $flow.card_upgrade_benefit dollars.\nDo you want to enroll for this card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "06de9088-ab35-43e6-bc68-9a1aad8a263b"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "6aa7cce4-cb50-4c4f-b4e7-c8cf94d6ff1b"
+  } ]
+}

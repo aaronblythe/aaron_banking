@@ -1,0 +1,120 @@
+{
+  "name": "07ee2961-53dd-4904-8829-a6725aeaafea",
+  "displayName": "\u003e confirm another card lock required",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Do you want to block any other card?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e fetch card details API",
+    "name": "9fa98723-d0ea-4c51-9393-223e2a3f1c22"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, thank you for calling us." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "end success",
+    "name": "e68328a0-ac68-44b2-ba9d-20ee4ae26dd5"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "fd575411-2030-4344-9ac9-21e5682d41c8"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "f6736d99-1a53-4a41-8564-f09d67de30de"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. Do you want to block any other card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d16c140a-9e52-4e60-aa58-6b128df45f28"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. Do you want to block any other card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6b4710a6-b4c2-4b8d-b83f-54e27947b847"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "334dd496-53db-47e5-bb1f-11378e28c2e3"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. Do you want to block any other card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a0598528-4fe5-463f-934a-964fc361e8d7"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. Do you want to block any other card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "2180c30b-124c-462f-a2a7-046194e33de2"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "8f2ccee5-687b-4cb0-947f-54a16cc4b607"
+  } ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "23b806fe-8ee5-453e-a2da-781c3bcce5e2",
+  "displayName": "credit card last four digits",
+  "parameters": [ {
+    "id": "number",
+    "entityType": "@sys.number"
+  } ],
+  "priority": 500000,
+  "numTrainingPhrases": 4
+}

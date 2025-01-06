@@ -1,0 +1,74 @@
+{
+  "name": "1e9b845e-2888-4435-a887-21bbde276938",
+  "displayName": "message multiple cards",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "$flow.vendor_name",
+      "value": "$flow.card_vendor_all[$sys.func.TO_TEXT($flow.card_counter)]"
+    }, {
+      "parameter": "card_number",
+      "value": "$session.params.last_four_digit_of_all_cards[$sys.func.TO_TEXT($flow.card_counter)]"
+    }, {
+      "parameter": "$flow.card_counter",
+      "value": "$sys.func.ADD($flow.card_counter,1)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$flow.card_counter \u003c $session.params.card_count",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.registered_card_message",
+        "value": "$flow.registered_card_message a $flow.vendor_name ending in \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.card_number\u003c/say-as\u003e,"
+      } ]
+    },
+    "targetPage": "message multiple cards",
+    "name": "19710f2b-7542-43ce-89c2-784dfe45255c"
+  }, {
+    "condition": "$flow.card_counter = $session.params.card_count",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e$flow.registered_card_message\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$flow.registered_card_message",
+        "value": "$flow.registered_card_message and a $flow.vendor_name ending in \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.card_number\u003c/say-as\u003e."
+      } ]
+    },
+    "targetFlow": "Card Last 4 Digit Collection",
+    "name": "cedd9a56-afdc-4193-88fa-f334ea509e46"
+  }, {
+    "condition": "$session.params.card_count \u003e 1 AND $session.params.last_four_digit_of_card_number != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.registered_card_message",
+        "value": "We have found multiple cards registered with your number. We have "
+      }, {
+        "parameter": "$flow.card_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "\u003e validate card API",
+    "name": "488a946a-8364-4c30-90e6-e0c0e5fd557c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "end failure",
+    "event": "flow.failed",
+    "triggerFulfillment": {
+    
+    },
+    "name": "58cf1965-0e91-44ce-b19a-4388adea4228"
+  }, {
+    "targetPage": "end escalation",
+    "event": "flow.failed.human-escalation",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a45534bf-e882-446e-8d00-e3f36a32d49b"
+  } ]
+}

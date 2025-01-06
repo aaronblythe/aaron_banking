@@ -1,0 +1,87 @@
+{
+  "name": "a35bcfa3-1346-419d-bf82-9899c2b944b1",
+  "displayName": "\u003e fetch card details API",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Please wait while we are fetching your card details." ]
+      },
+      "languageCode": "en"
+    } ],
+    "webhook": "prebuilt_components_account_services:get_card_details",
+    "tag": "cardDetails"
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.COUNT($session.params.last_four_digit_of_all_cards) \u003c 1 OR $sys.func.COUNT($session.params.last_four_digit_of_all_cards) = 0 OR $sys.func.COUNT($session.params.last_four_digit_of_all_cards) = \"\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are unable to complete this action as there is no card associated with your phone number. We apologize for any inconvenience caused." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "name": "79b70a2c-3171-4ed5-96af-5af58cc9cb56"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.last_four_digit_of_all_cards) \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_count",
+        "value": "$sys.func.COUNT($session.params.last_four_digit_of_all_cards)"
+      } ]
+    },
+    "targetPage": "message multiple cards",
+    "name": "d70b658d-8973-4b31-92b1-6b55fe767a92"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.last_four_digit_of_all_cards) = 1 AND $session.params.last_four_digit_of_all_cards != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_four_digit_of_card_number",
+        "value": "$session.params.last_four_digit_of_all_cards[0]"
+      }, {
+        "parameter": "card_count",
+        "value": "$sys.func.COUNT($session.params.last_four_digit_of_all_cards)"
+      } ]
+    },
+    "targetPage": "\u003e validate card API",
+    "name": "e9492467-8212-4613-abfc-5314dab3c9ca"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We apologize for the inconvenience. Our system is currently experiencing technical issues. Our technical team is actively working to resolve this issue. Please try again after sometime." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "webhook_error"
+      } ]
+    },
+    "name": "6cc3a254-572e-4f91-bf53-62772afaea2f"
+  }, {
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We apologize for the inconvenience. Our system is currently experiencing technical issues. Our technical team is actively working to resolve this issue. Please try again after sometime." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "webhook_not_found"
+      } ]
+    },
+    "name": "c9dbb21c-78e4-46d0-b89f-29893a425bb0"
+  } ],
+  "description": "Route based message is added in 1st route"
+}

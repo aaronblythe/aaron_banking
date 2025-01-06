@@ -1,0 +1,9 @@
+{
+  "name": "d49daf53-7fa1-4f55-99a8-b51ff7b93a40",
+  "displayName": "Account Lookup",
+  "description": "An API to look up an Account Balance",
+  "openApiSpec": {
+    "ignoreUnknownFields": true
+  },
+  "toolType": "CUSTOMIZED_TOOL"
+}

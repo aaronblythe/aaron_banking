@@ -1,0 +1,201 @@
+{
+  "name": "3c4b119a-e26c-4112-b4db-619e4d4de4d3",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Hi there! Welcome to Cymbal Bank. I'm here to help you with your account. Can I please have your telephone number?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "8161234567"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. Just to confirm, is that 8161234567?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "toolUse": {
+      "tool": "Account Lookup",
+      "action": "getUserById",
+      "inputActionParameters": {
+        "telephoneNumber": 8161234567
+      },
+      "outputActionParameters": {
+        "200": {
+          "banking": {
+            "last_updated": "2024-12-05T00:00:00Z",
+            "latest_transactions": [ {
+              "amount": 60,
+              "category": "Utilities",
+              "date": "2024-11-15",
+              "deviceInfo": "Windows PC, Chrome",
+              "failedTransactionAttempts": 1,
+              "merchant": "City Electricity",
+              "paymentMethod": "Debit Card",
+              "status": "Completed",
+              "transactionId": "123456790",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 800,
+              "category": "Dining",
+              "date": "2024-11-15",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Pete’s Taco House",
+              "paymentMethod": "Credit Card",
+              "status": "Completed",
+              "transactionId": "123456791",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 200,
+              "category": "Groceries",
+              "date": "2024-11-16",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Supermarket",
+              "paymentMethod": "Debit Card",
+              "status": "Completed",
+              "transactionId": "123456792",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 50,
+              "category": "Transportation",
+              "date": "2024-11-17",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Gas Station",
+              "paymentMethod": "Credit Card",
+              "status": "Completed",
+              "transactionId": "123456793",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 22.5,
+              "category": "Dining",
+              "date": "2024-11-18",
+              "deviceInfo": "Unknown Device",
+              "failedTransactionAttempts": 2,
+              "merchant": "Local Coffee Shop",
+              "paymentMethod": "Credit Card",
+              "status": "Completed",
+              "transactionId": "123456794",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 30,
+              "category": "Entertainment",
+              "date": "2024-11-19",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Local Cinema",
+              "paymentMethod": "Credit Card",
+              "status": "Completed",
+              "transactionId": "123456795",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 120,
+              "category": "Utilities",
+              "date": "2024-11-19",
+              "deviceInfo": "Windows PC, Chrome",
+              "failedTransactionAttempts": 0,
+              "merchant": "Internet Provider",
+              "paymentMethod": "Debit Card",
+              "status": "Completed",
+              "transactionId": "123456796",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 85,
+              "category": "Dining",
+              "date": "2024-11-20",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Restaurant",
+              "paymentMethod": "Credit Card",
+              "status": "Completed",
+              "transactionId": "123456797",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 45,
+              "category": "Healthcare",
+              "date": "2024-11-22",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Pharmacy",
+              "paymentMethod": "Debit Card",
+              "status": "Completed",
+              "transactionId": "123456798",
+              "userLocation": "San Antonio"
+            }, {
+              "amount": 250,
+              "category": "Clothing",
+              "date": "2024-11-24",
+              "deviceInfo": "iPhone 12, iOS",
+              "failedTransactionAttempts": 0,
+              "merchant": "Department Store",
+              "paymentMethod": "Credit Card",
+              "status": "Completed",
+              "transactionId": "123456799",
+              "userLocation": "San Antonio"
+            } ],
+            "total_balance": 25000.5
+          },
+          "credit": {
+            "amount": 750,
+            "nextPaymentDue": "2024-12-30"
+          },
+          "currency": "USD",
+          "id": "8161234567",
+          "insurance": {
+            "nextPaymentAmount": 500,
+            "policyNumber": "1234567",
+            "recentClaims": [ {
+              "amount": 1000,
+              "status": "paid"
+            } ]
+          },
+          "mortgage": {
+            "amount": 1500,
+            "currentInterest": 500,
+            "currentPrincipal": 1000,
+            "loanBalance": 100000,
+            "monthlyPayment": 1500,
+            "nextPaymentDue": "2025-01-01"
+          },
+          "name": "Aaron Blythe"
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Hi Aaron, I see that your current account balance is $25,000.50. Is there anything else I can help you with today?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I lost my credit card"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. I can help you report your credit card as lost or stolen."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Lost or Stolen Credit Card",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "default entry"
+  },
+  "playbookOutput": {
+    "executionSummary": "move to the lost or stolen card flow"
+  },
+  "displayName": "lost or stolen credit card routing.",
+  "retrievalStrategy": "DEFAULT",
+  "languageCode": "en"
+}

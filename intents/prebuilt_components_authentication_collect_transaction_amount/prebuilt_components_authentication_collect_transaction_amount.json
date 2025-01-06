@@ -1,0 +1,11 @@
+{
+  "name": "42ac986d-049b-48c6-a57d-8a97c1b842d1",
+  "displayName": "prebuilt_components_authentication_collect_transaction_amount",
+  "parameters": [ {
+    "id": "transaction_amount",
+    "entityType": "@sys.number-sequence",
+    "isList": true
+  } ],
+  "priority": 500000,
+  "numTrainingPhrases": 28
+}

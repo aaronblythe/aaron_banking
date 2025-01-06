@@ -1,0 +1,26 @@
+{
+  "name": "9cf7206c-3662-44a6-9150-2ffbf41af228",
+  "displayName": "end failure",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Thank you for calling. We're sorry, but we are unable to proceed further without the requested information at this time." ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "origin",
+        "value": null
+      } ]
+    },
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "name": "72db3e9f-485c-4c4f-8484-81da1b650136"
+  } ]
+}

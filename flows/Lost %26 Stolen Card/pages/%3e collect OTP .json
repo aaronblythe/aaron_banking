@@ -1,0 +1,133 @@
+{
+  "name": "d96b256c-eeee-48c6-a72d-cc8f9130f253",
+  "displayName": "\u003e collect OTP ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_authentication_collect_code",
+    "condition": "$session.params.collect_code != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.collect_otp",
+        "value": "$sys.func.JOIN(\"\", $session.params.collect_code)"
+      }, {
+        "parameter": "collect_code",
+        "value": null
+      } ]
+    },
+    "targetPage": "verify OTP",
+    "name": "76c714c8-6879-43c9-9e49-b0ba228be754"
+  }, {
+    "intent": "prebuilt_components_authentication_otp_not_received",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$flow.channel",
+        "value": null
+      }, {
+        "parameter": "$flow.otp_not_received",
+        "value": "true"
+      } ]
+    },
+    "targetPage": "retry OTP",
+    "name": "648e70f9-97ce-4f06-b33b-07fc5d493e12"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "74a04ec8-f503-44b7-8213-41310ef40b9f"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "f436ac67-5809-4dec-b281-f5bf0e06492a"
+  }, {
+    "intent": "prebuilt_components_authentication_denial",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "b5e53742-dc19-4043-9b84-e754578232e4"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. Can you please enter your 6-digit OTP?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "1bc9ccc8-2de4-4bbf-8734-5b4d263ab3c4"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. Can you please enter your 6-digit OTP?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "620046a2-da0c-4dd9-86d2-72d2a41c843d"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "30e37460-d313-4950-a0f5-0425bec27fd8"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. Please try again." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "fd7fcb4a-8634-4811-8ec7-21a8cdf4cefd"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. Please try again." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "37ce46d1-69b5-43e5-8ab6-ce841f325640"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "0768f560-6e72-4827-a8f3-0bcc7740d0ca"
+  } ]
+}

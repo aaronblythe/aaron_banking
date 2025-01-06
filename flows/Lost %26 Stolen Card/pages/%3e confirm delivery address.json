@@ -1,0 +1,125 @@
+{
+  "name": "e3fd23e1-9986-4719-8309-28b815512143",
+  "displayName": "\u003e confirm delivery address",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eWe will deliver the card to your registered address. Can you please confirm your delivery address zip code is \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.zip_code\u003c/say-as\u003e?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e reissue new card API",
+    "name": "b92e6633-26b1-437a-b7e5-1edcfe7b3607"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, you can update your address by logging in to your Net Banking profile." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Alternatively, we can also share a link with your registered phone number via SMS to update your address. To confirm, please say yes or no." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "\u003e confirm send SMS link",
+    "name": "c8cd77f8-7f2d-4dec-ba30-16a201891766"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "d746bacb-ee55-4db1-8b29-383a9a36b131"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "82a90a71-6aa7-443a-947e-829dd2b91226"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, we were not able to hear you. We will deliver the card to your registered address. Can you please confirm your delivery address zip code \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.zip_code\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "433da47c-6e05-41ce-bd5a-9b6ec2d9f757"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eHmm, we still cannot hear you. We will deliver the card to your registered address. Can you please confirm your delivery address zip code \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.zip_code\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d58befcf-76cf-42fb-9eff-1853e9f68206"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "e73b79cd-c2ab-4d80-8747-c5a3e9e81863"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, we didn’t get that. We will deliver the card to your registered address. Can you please confirm your delivery address zip code \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.zip_code\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c91286a5-9593-4a80-82ca-76111564bfac"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, we're still not getting that. We will deliver the card to your registered address. Can you please confirm your delivery address zip code \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.zip_code\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "5a9b0279-431e-4b8b-ba0c-9082ac6b33d5"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "661e147a-71eb-4c13-9963-d8b92631f155"
+  } ]
+}

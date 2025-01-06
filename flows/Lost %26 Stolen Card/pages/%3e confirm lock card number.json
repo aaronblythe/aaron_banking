@@ -1,0 +1,115 @@
+{
+  "name": "2eaa07fc-bdd1-457a-888a-c0bd3d2c27ab",
+  "displayName": "\u003e confirm lock card number",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eThanks for your input. We will help you to lock your card permanently. Can you please confirm if the card ends with \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "check user email",
+    "name": "be941b83-010c-460e-808d-b68c04c4c78a"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "end failure",
+    "name": "64d93725-d144-4112-ac74-4b9fd367a6c7"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "cc756332-a773-4f54-90eb-b71ffd149eb9"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "b6232c59-8f48-4e22-a409-f8378e24d3ce"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. \u003cspeak\u003eDon't worry, we will permanently lock your card. Can you please confirm if the card ends with \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "947a238b-f986-4742-b7ed-1514cda16a12"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. \u003cspeak\u003eDon't worry, we will permanently lock your card. Can you please confirm if the card ends with \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "5368a305-ecc7-4414-beb1-fae551a5b3a4"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "fcd7cb5e-b4fb-4126-82de-0351f6fdb104"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry we didn’t get that. \u003cspeak\u003eDon't worry, we will permanently lock your card. Can you please confirm if the card ends with \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "546def7f-f8ff-401d-bf4f-5f92f76c6ffe"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. \u003cspeak\u003eDon't worry, we will permanently lock your card. Can you please confirm if the card ends with \u003csay-as interpret-as=\"verbatim\"\u003e$session.params.last_four_digit_of_card_number\u003c/say-as\u003e?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "3b1023c1-cb55-4b97-85cc-6922c866d946"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "c8f9acf5-befa-4090-a6e1-12bd137850e1"
+  } ]
+}

@@ -1,0 +1,118 @@
+{
+  "name": "7778b15c-6734-4d8d-b4a2-70d37e14ed5f",
+  "displayName": "\u003e reissue new card API",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "prebuilt_components_lost_and_stolen_card:reissue_card_number",
+    "tag": "reissueCard"
+  },
+  "transitionRoutes": [ {
+    "condition": "$flow.acknowledgement_number = null OR $flow.acknowledgement_number = \"\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We apologize for the inconvenience. Our system is currently experiencing technical issues. Our technical team is actively working to resolve this issue. Please try again after sometime." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "name": "0865d877-3cff-4d9f-bc51-589774faa774"
+  }, {
+    "condition": "$session.params.card_count \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, please wait for a few seconds while we are raising the request for reissuing a new card." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe reissue request for the new card was successful. Your request number is \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.acknowledgement_number\u003c/say-as\u003e and has been shared successfully to your registered mobile number.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "The card will be delivered to your registered address in 3 working days. To use the card please follow the instructions shared with the card." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$flow.lock_reason",
+        "value": null
+      }, {
+        "parameter": "$flow.channel",
+        "value": null
+      }, {
+        "parameter": "$flow.new_channel",
+        "value": null
+      }, {
+        "parameter": "$flow.lock_type",
+        "value": null
+      }, {
+        "parameter": "$flow.otp_retry_count",
+        "value": 0
+      } ]
+    },
+    "targetPage": "\u003e confirm another card lock required",
+    "name": "a0698f17-e49c-45d2-96c0-745816d3d348"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, please wait for a few seconds while we are raising the request for reissuing a new card." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe reissue request for the new card was successful. Your request number is \u003csay-as interpret-as=\"verbatim\" google:style=\"zero-as-zero\"\u003e$flow.acknowledgement_number\u003c/say-as\u003e and has been shared successfully to your registered mobile number.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "The card will be delivered to your registered address in 3 working days. To use the card please follow the instructions shared with the card." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "end success",
+    "name": "8d550569-5c42-4217-8996-d2640c22482c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We apologize for the inconvenience. Our system is currently experiencing technical issues. Our technical team is actively working to resolve this issue. Please try again after sometime." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "webhook_error"
+      } ]
+    },
+    "name": "2cb89453-df02-4eb4-89a6-ce1deed2053d"
+  }, {
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We apologize for the inconvenience. Our system is currently experiencing technical issues. Our technical team is actively working to resolve this issue. Please try again after sometime." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "webhook_not_found"
+      } ]
+    },
+    "name": "cead2182-5acf-4728-bf73-b0d0b71cebdc"
+  } ],
+  "description": "Route based agent response is added. "
+}

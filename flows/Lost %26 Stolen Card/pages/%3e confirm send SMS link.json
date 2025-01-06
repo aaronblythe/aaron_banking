@@ -1,0 +1,120 @@
+{
+  "name": "f0e9ed62-cefe-45c8-9bea-de59fdece0f8",
+  "displayName": "\u003e confirm send SMS link",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, we will send an SMS with a link to your registered phone number. Kindly update the new address, and once updated, try calling us back." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "end success",
+    "name": "d0802790-0ea9-4f41-a580-e73f4dc38416"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, thank you for calling us. Kindly update the new address, and once updated, you can call us back." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "END_FLOW_WITH_FAILURE",
+    "name": "6d95ad3c-c4b1-4616-96a1-dc133a488193"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "09f706b9-f454-4e39-b661-11a545ee7a42"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "ea3465bd-e348-4f1d-8c75-e09efb2c3b9f"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. We can share a link with your registered phone number via SMS to update your address. To confirm, please say yes or no." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "8d1a6ff0-e1df-491d-9e58-332458abf648"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. We can share a link with your registered phone number via SMS to update your address. To confirm, please say yes or no." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "804de609-a554-483e-9426-d67f96028740"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "88e4c456-c5d0-4d7a-a268-b34b6071b889"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. We can share a link with your registered phone number via SMS to update your address. To confirm, please say yes or no." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "b8b4576f-7812-42a9-b34d-e88b54b9f14c"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. We can share a link with your registered phone number via SMS to update your address. To confirm, please say yes or no." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6c7255ba-7dba-4d07-bb5f-50fdef661313"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "ef2e4053-7258-438c-9d03-e54319f7f23a"
+  } ]
+}

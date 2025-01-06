@@ -1,0 +1,64 @@
+{
+  "name": "5fe29d41-360d-4a1b-a4cf-e92e63b4b783",
+  "displayName": "\u003e collect lock reason",
+  "form": {
+    "parameters": [ {
+      "displayName": "$flow.lock_reason",
+      "required": true,
+      "entityType": "@prebuilt_components_lost_and_stolen_lock_reason",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "\u003e confirm lock card number",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "$flow.lock_reason",
+              "value": null
+            } ]
+          },
+          "name": "a0a9647c-f886-4c2c-82af-d689c0ed0e05"
+        }, {
+          "targetPage": "\u003e confirm lock card number",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "$flow.lock_reason",
+              "value": null
+            } ]
+          },
+          "name": "f7c8a17b-437f-43c2-9022-6bc1294d5d6f"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Please tell us why you are locking your card. You can choose from the options like damaged, stolen, lost or others." ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "cda3726d-73cf-4c4e-b7a4-4537b6dd5755"
+  }, {
+    "condition": "$page.params.status = \"FINAL\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "\u003e confirm lock card number",
+    "name": "9142b6f1-c9d8-4471-9550-6b05a4744fc4"
+  } ],
+  "description": "User input at this page is not mandatory. Even if, user doesn’t say anything or does not feel comfortable sharing the reason, agent will move to the next page.\nDenial of information is handled in no-match event handler."
+}

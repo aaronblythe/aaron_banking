@@ -1,0 +1,23 @@
+{
+  "name": "7aad89ec-d0fd-4a9d-9c7f-b12ca5b74ae6",
+  "displayName": "prebuilt_components_account_services:get_card_details",
+  "genericWebService": {
+    "uri": "https://www.example.com",
+    "webhookType": "FLEXIBLE",
+    "httpMethod": "POST",
+    "requestBody": "{\n  \"phone_number\": \"$session.params.phone_number\",\n  \"fulfillmentInfo\": {\n    \"tag\": \"cardDetails\"\n  }\n}",
+    "parameterMapping": [ {
+      "key": "$flow.card_vendor_all",
+      "value": "card_vendor_all"
+    }, {
+      "key": "card_count",
+      "value": "card_count"
+    }, {
+      "key": "last_four_digit_of_all_cards",
+      "value": "cards"
+    } ]
+  },
+  "timeout": {
+    "seconds": 5
+  }
+}

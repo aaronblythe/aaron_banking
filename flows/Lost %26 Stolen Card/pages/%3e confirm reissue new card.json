@@ -1,0 +1,120 @@
+{
+  "name": "0201261f-cb14-437f-ac17-221467207ec1",
+  "displayName": "\u003e confirm reissue new card",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Do you want to reissue a new card?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "prebuilt_components_confirmation_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "check card upgrade",
+    "name": "8e41520b-2efa-4697-9b60-f80caef230a1"
+  }, {
+    "intent": "prebuilt_components_confirmation_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, thank you for calling us." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "end success",
+    "name": "2a2d4083-0570-4edf-9c5b-70561b91d4a6"
+  }, {
+    "intent": "prebuilt_components_escalate_human_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "agent"
+      } ]
+    },
+    "targetPage": "end escalation",
+    "name": "c6839deb-51f7-4f05-a312-25f06aa691b0"
+  }, {
+    "intent": "prebuilt_components_denial_of_information",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "denial_of_information"
+      } ]
+    },
+    "targetPage": "end failure",
+    "name": "b463b994-1450-4ede-a604-c202e0ffad7d"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we were not able to hear you. Do you want to reissue a new card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "43b2c44a-30e5-4e77-ba63-f1a390dfd36b"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hmm, we still cannot hear you. Do you want to reissue a new card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "40c2582b-f3a2-42a3-9a67-a58767ebc476"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_input"
+      } ]
+    },
+    "name": "b94d077e-8cd8-4c16-a63c-e03b5c1384a3"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we didn’t get that. Do you want to reissue a new card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "32160dfe-3902-415b-a98e-cfdf82661021"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we're still not getting that. Do you want to reissue a new card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "916085d5-f2cf-462e-9e0d-416dff4d896b"
+  }, {
+    "targetPage": "end failure",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transfer_reason",
+        "value": "max_no_match"
+      } ]
+    },
+    "name": "c04fbed1-7069-477e-84d9-52dd947f4e07"
+  } ]
+}

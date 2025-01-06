@@ -1,0 +1,58 @@
+{
+  "name": "05838cc1-f9bc-47d3-8a02-cc6db0bb11b0",
+  "displayName": "retry OTP",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "$flow.otp_retry_count",
+      "value": "$sys.func.ADD($flow.otp_retry_count,1)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$flow.otp_retry_count \u003c $flow.max_otp_retry_count AND $flow.otp_not_received != \"true\"",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$flow.otp_retry_count = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, we didn’t get that. Can you please enter your 6-digit OTP?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$flow.otp_retry_count = 2",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, we're still not getting that. Can you please enter your 6-digit OTP?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "\u003e collect OTP ",
+    "name": "5b4e9c2b-693f-4d17-bf5e-9042c95be0cc"
+  }, {
+    "condition": "$flow.otp_not_received = \"true\" AND $flow.otp_retry_count \u003c $flow.max_otp_retry_count",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "check user email",
+    "name": "f14a190d-4da4-44c6-90fb-16c638fe9d8d"
+  }, {
+    "condition": "$flow.otp_retry_count = $flow.max_otp_retry_count",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "end failure",
+    "name": "01624151-caf2-442c-98f4-9104c1e943bb"
+  } ],
+  "description": "Route specific fulfillment defined.\nParameter $flow.otp_retry_count defined at Entry fulfillment."
+}
